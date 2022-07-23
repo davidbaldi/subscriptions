@@ -1,0 +1,8 @@
+pipenv --rm
+# Removes virtual environment from Recipes folder.
+
+pipenv shell
+# Creates virtual environment if not created.
+
+pipenv install flask pymysql flask-bcrypt
+# Installs packages.

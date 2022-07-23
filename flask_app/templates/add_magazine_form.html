@@ -1,0 +1,41 @@
+<!-- add_magazine_form.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" class="style">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add a Magazine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div>
+        <a href="/dashboard/{{ session['user_id'] }}">Dashboard</a>
+        <a href="/users/logout">Log out</a>
+    </div>
+    <form action="/magazines/add/process" method="post">
+        <input type="hidden" value="{{ session['user_id'] }}" name="user_id">
+        <h2>Add a New Magazine!</h2>
+
+        <div>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title">
+        </div>
+
+        <div>
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description">
+        </div>
+
+        <button type="submit">Submit</button>
+        {% with messages = get_flashed_messages(category_filter=["add_magazine_error"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash">{{ message }}</p></h3>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </form>
+</body>
+</html>

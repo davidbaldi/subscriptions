@@ -1,0 +1,17 @@
+<!-- recipe.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" class="style">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Error: No Recipe Found</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <h1>You must add a magazine to activate your subscriber's account!</h1>
+    <a href="/dashboard/{{ session['user_id'] }}">Back to Dashboard</a>
+    <a href="users/logout">Log out</a>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!-- edit_recipe.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" class="style">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Edit your recipe</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <form action="/recipes/edit/process" method="post">
+        <input type="hidden" value="{{ recipe.id }}" name="id">
+        <h2>Edit a Recipe!</h2>
+        <fieldset>
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="{{ recipe.name }}">
+        </fieldset>
+        <fieldset>
+            <label for="description">Description:</label>
+            <input type="text" name="description" value="{{ recipe.description }}">
+        </fieldset>
+        <fieldset>
+            <label for="instructions">Instructions:</label>
+            <input type="text" name="instructions" value="{{ recipe.instructions }}">
+        </fieldset>
+        <fieldset>
+            <label for="cooked_on">Cooked on:</label>
+            <input type="date" name="cooked_on" required>
+        </fieldset>
+        <fieldset>
+            <label for="under_30_minutes">Under 30 minutes?</label>
+            <label for="yes">yes
+                <input type="radio" name="under_30_minutes" id="yes" value="yes" required>
+            </label>
+            <label for="no">no
+                <input type="radio" name="under_30_minutes" id="no" value="no" required>
+            </label>
+        </fieldset>
+        <button type="submit">Submit</button>
+    </form>
+    <a href="/recipes">back to recipes</a>
+    <a href="users/logout">log out</a>
+    {% with messages = get_flashed_messages(category_filter=['add_recipe_error']) %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="flash">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

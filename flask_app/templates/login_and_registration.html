@@ -1,0 +1,93 @@
+<!-- login_and_registration.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" class="style">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Subscription Service</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <fieldset class="registration">
+        <form action="/process_registration" method="post" novalidate>
+            <h2>Register</h2>
+
+            <p>
+                <label for="first_name">First name:</label>
+                <input type="text" name="first_name">
+            </p>
+
+            <p>
+                <label for="last_name">Last name:</label>
+                <input type="text" name="last_name">
+            </p>
+
+            <p>
+                <label for="email">Email:</label>
+                <input type="email" name="email">
+            </p>
+
+            <p>
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+            </p>
+
+            <p>
+                <label for="confirm_password">Password:</label>
+                <input type="password" name="confirm_password">
+            </p>
+
+            <p><button type="submit">Register</button></p>
+
+            <div class="flash">
+                {% with messages = get_flashed_messages(category_filter=["registration_error"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </form>
+    </fieldset>
+
+    <fieldset class="login">
+        <form action="/process_login" method="post" novalidate>
+            <h2>Log in</h2>
+
+            <p>
+                <label for="email">Email:</label>
+                <input type="email" name="email">
+            </p>
+
+            <p>
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+            </p>
+            
+            <p><button type="submit">Login</button></p>
+
+            <div class="flash">
+                {% with messages = get_flashed_messages(category_filter=["login_error"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="flash">
+                {% with messages = get_flashed_messages(category_filter=['invalid_credentials_error']) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </form>
+    </fieldset>
+</body>
+</html>

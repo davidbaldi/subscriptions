@@ -1,0 +1,27 @@
+<!-- magazine.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" class="style">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Magazine: {{ magazine.name }}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <div>
+        <a href="/magazines/add_magazine">Add a magazine</a>
+        <a href="/dashboard/{{ session['user_id'] }}">Dashboard</a>
+        <a href="/users/logout">Log out</a>
+    </div>
+    <div>
+        <h1>{{ magazine.title }}</h1>
+        <p>Added by {{ magazine.user.first_name }}</p>
+        <h2>Description:</h2>
+        <div>
+            <span>{{ magazine.description }}</span>
+        </div>
+    </div>
+</body>
+</html>

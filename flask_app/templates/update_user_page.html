@@ -1,0 +1,75 @@
+<!-- update_user_page.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" class="style">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>User Account</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <div>
+        <a href="/magazines/add_magazine">Add a magazine</a>
+        <a href="/dashboard/{{ session['user_id'] }}">Dashboard</a>
+        <a href="/users/logout">Log out</a>
+    </div>
+    <div>
+        <fieldset>
+            <h2>Update your info, {{ session['first_name'] }}!</h2>
+            <form action="/users/process_update" method="post">
+            <p>
+                <label for="first_name">First name:
+                    <input type="text" id="first_name" name="first_name" value="{{ magazines[0].user.first_name }}">
+                </label>
+            </p>
+            <p>
+                <label for="last_name">Last name:
+                    <input type="text" id="last_name" name="last_name" value="{{ magazines[0].user.last_name }}">
+                </label>
+            </p>
+            <p>
+                <label for="email">Email:
+                    <input type="email" id="email" name="email" value="{{ magazines[0].user.email }}">
+                </label>
+            </p>
+                <button>Update</button>
+            </form>
+            {% with messages = get_flashed_messages(category_filter=["update_prompt"]) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash">{{ message }}</p></h3>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </fieldset>
+    </div>
+    <div>
+        <fieldset>
+            <h2>Manage your magazines, {{ session['first_name'] }}!</h2>
+                <table>
+                    {% for magazine in magazines %}
+                        {% if magazine %}
+                            <tr>
+                                <td>{{ magazine.title }}</td>
+                                <td>
+                                    <form action="/magazines/{{ magazine.id }}/delete" method="post">
+                                        <button>Delete</button></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+        </fieldset>
+    </div>
+    {% with messages = get_flashed_messages(category_filter=["user_update_error"]) %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="flash">{{ message }}</p></h3>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

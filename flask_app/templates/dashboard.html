@@ -1,0 +1,35 @@
+<!-- dashboard.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" class="style">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Subscription Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+    <body>
+        <h1>Welcome, {{ session['first_name'] }} {{ session['last_name'] }}!</h1>
+        <a href="/magazines/add_magazine">Add a magazine</a>
+        <a href="/users/{{ session['user_id'] }}/update">Account</a>
+        <a href="/users/logout"><button>Log out</button></a>
+        <h2>Magazines</h2>
+            <table>
+            <thead>
+                <tr>
+                    <th>Magazine</th>
+                    <th>Added by...</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for magazine in magazines %}
+                    <tr>
+                        <td><a href="/magazines/{{ magazine.id }}">{{ magazine.title }}</a></td>
+                        <td>{{ magazine.user.first_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
